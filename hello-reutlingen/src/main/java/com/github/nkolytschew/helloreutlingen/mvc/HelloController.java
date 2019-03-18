@@ -18,15 +18,15 @@ public class HelloController {
    */
   public HelloController() {
     this.responseModelMap = new HashMap<>();
-    responseModelMap.put("1", new ResponseModel("Resposne mit Message 1"));
-    responseModelMap.put("2", new ResponseModel("Resposne mit Message 2"));
-    responseModelMap.put("3", new ResponseModel("Resposne mit Message 3"));
-    responseModelMap.put("4", new ResponseModel("Resposne mit Message 4"));
-    responseModelMap.put("5", new ResponseModel("Resposne mit Message 5"));
-    responseModelMap.put("6", new ResponseModel("Resposne mit Message 6"));
-    responseModelMap.put("7", new ResponseModel("Resposne mit Message 7"));
-    responseModelMap.put("8", new ResponseModel("Resposne mit Message 7"));
-    responseModelMap.put("9", new ResponseModel("Resposne mit Message 8"));
+    responseModelMap.put("1", new ResponseModel("Response mit Message 1"));
+    responseModelMap.put("2", new ResponseModel("Response mit Message 2"));
+    responseModelMap.put("3", new ResponseModel("Response mit Message 3"));
+    responseModelMap.put("4", new ResponseModel("Response mit Message 4"));
+    responseModelMap.put("5", new ResponseModel("Response mit Message 5"));
+    responseModelMap.put("6", new ResponseModel("Response mit Message 6"));
+    responseModelMap.put("7", new ResponseModel("Response mit Message 7"));
+    responseModelMap.put("8", new ResponseModel("Response mit Message 8"));
+    responseModelMap.put("9", new ResponseModel("Response mit Message 9"));
   }
 
   /**
