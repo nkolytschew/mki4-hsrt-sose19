@@ -3,10 +3,7 @@ package com.github.nkolytschew.helloreutlingen.mvc;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HelloController {
@@ -53,6 +50,30 @@ public class HelloController {
     return responseModelMap.get(id);
   }
 
-  // post, delete, put follows
-  // analog to GetMapping
+  @GetMapping("/response")
+  public Map<String, ResponseModel> getResponseMap() {
+    return responseModelMap;
+  }
+
+  @PostMapping("/response/{id}")
+  public ResponseModel createNewResponseById(@PathVariable String id, @RequestBody ResponseModel body) throws IllegalAccessException {
+    if (responseModelMap.containsKey(id)) {
+      throw new IllegalAccessException("Update not supported in POST!");
+    }
+    return responseModelMap.put(id, body);
+  }
+
+  @DeleteMapping("/response/{id}")
+  public ResponseModel deleteResponseById(@PathVariable String id) {
+    return responseModelMap.remove(id);
+  }
+
+  @PutMapping("/response/{id}")
+  public ResponseModel updateResponseById(@PathVariable String id, @RequestBody ResponseModel body) throws IllegalAccessException {
+    if (responseModelMap.containsKey(id)) {
+      return responseModelMap.put(id, body);
+    } else {
+      throw new IllegalAccessException("Create not supported in PUT!");
+    }
+  }
 }
