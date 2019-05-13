@@ -1,0 +1,24 @@
+
+
+
+
+Um die app über den hostname hs-reutilingen aufzurufen muss unter system32/hosts die minikube ip mit den namen gemaped werden. Die minikube ip bekommt man mit dem befehl "minikube ip"
+Der eintrag sieht z.b wie folgt aus
+
+192.168.99.100 hs-reutilingen  
+
+
+
+kubectl get pods -> zeigt alle pods
+kubcetl get deployments  -> zeigt alle deployments
+kubectl get service -> zeigt alle services
+kubectl get ingress -> zeigt alle ingress objekte
+kubcetl get nodes -> zeigt die verfügbaren nodes an
+
+kubectl apply -f deployment.yaml  -> wende deployment beschreibung auf kubernetes an
+
+kubectl describe deployment -> beschreibt ein deployment
+
+kubectl top nodes -> zeigt wie viel speicher auf dem jeweiligen node verfügbar ist
+kubectl top pods -> zeigt wie viel die deployten pods benutzn
+
