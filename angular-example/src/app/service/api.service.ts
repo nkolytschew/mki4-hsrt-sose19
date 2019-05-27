@@ -8,18 +8,18 @@ import {User} from '../model/user';
 })
 export class ApiService {
 
-  host = 'http://localhost:8081';
+  host = 'http://localhost:9000/api';
 
   constructor(private http: HttpClient) {
   }
 
   getUserFromRemote(): Observable<User[]> {
-    const requestPath = '/users';
+    const requestPath = '/user/users';
     return this.http.get<User[]>(this.host + requestPath);
   }
 
   createUserInRemote(): Observable<User> {
-    const requestPath = '/user';
+    const requestPath = '/registration/user';
     return this.http.post<User>(this.host + requestPath, new User('abc', 'efgsh'));
   }
 

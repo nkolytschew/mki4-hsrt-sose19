@@ -4,10 +4,14 @@ import com.github.nkolytschew.registration.service.jpa.RegistrationRepository;
 import com.github.nkolytschew.registration.service.remote.MappingService;
 import com.github.nkolytschew.registration.service.remote.RegistrationService;
 import com.github.nkolytschew.registration.service.rest.model.MyUser;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
@@ -34,6 +38,7 @@ public class RegistrationServiceImpl implements RegistrationService {
      * save to Database.
      * map from Entity to Api.
      */
+    @HystrixCommand(fallbackMethod = "reliable")
     @Override
     public ResponseEntity<MyUser> createUser(MyUser user) {
         final var userEntity = mappingService.mapFromApiToEntity(user);
@@ -42,6 +47,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         return response;
     }
 
+    @HystrixCommand(fallbackMethod = "reliable2")
     @Override
     public ArrayList<MyUser> getAllUser() {
         final var entities = repository.findAll();
@@ -49,5 +55,15 @@ public class RegistrationServiceImpl implements RegistrationService {
         entities.forEach(user -> userList.add(mappingService.mapToApiResponse(user).getBody()));
 
         return userList;
+    }
+
+    private ResponseEntity<MyUser> reliable(MyUser user){
+        final var myUser = new MyUser();
+        myUser.setName("default-fallback");
+        return ResponseEntity.ok(myUser);
+    }
+
+    private ArrayList<MyUser> reliable2(){
+        return new ArrayList<>();
     }
 }
