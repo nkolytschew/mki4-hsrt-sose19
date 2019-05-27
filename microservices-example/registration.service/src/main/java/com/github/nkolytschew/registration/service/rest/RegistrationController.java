@@ -4,10 +4,7 @@ import com.github.nkolytschew.registration.service.remote.MappingService;
 import com.github.nkolytschew.registration.service.remote.RegistrationService;
 import com.github.nkolytschew.registration.service.rest.model.MyUser;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -35,6 +32,7 @@ public class RegistrationController {
     // valid body:    { "username": "nik", "name": "nikita"}
     // invalid body:  { "username": "nik", "name1": "nikita"}
     //
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("user")
     public ResponseEntity<MyUser> createMyUser(@RequestBody MyUser user) {
         final var response = this.registrationService.createUser(user);
@@ -42,6 +40,7 @@ public class RegistrationController {
         return response;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("users")
     public ArrayList<MyUser> users() {
         return this.registrationService.getAllUser();
